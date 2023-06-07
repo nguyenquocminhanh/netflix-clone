@@ -14,7 +14,7 @@ const MovieCard: React.FC<MovieCardProps> = ({
     const router = useRouter();
     const { openModal } = useInfoModal();
     return (
-        <div className="group bg-zinc-900 col-span relative h-[12vw]">
+        <div className="group bg-zinc-900 col-span relative h-[24vw] md:h-[12vw]">
             <img src={data.thumbnailUrl} alt="Thumbnail"
                 className="
                     cursor-pointer
@@ -27,7 +27,7 @@ const MovieCard: React.FC<MovieCardProps> = ({
                     sm:group-hover:opacity-0
                     delay-300
                     w-full
-                    h-[12vw]
+                    h-[24vw] md:h-[12vw]
             "/>
 
             <div className="
@@ -37,14 +37,14 @@ const MovieCard: React.FC<MovieCardProps> = ({
                 transition
                 duration-200
                 z-10
-                invisible
-                sm:visible
+           
                 delay-300
                 w-full
                 scale-0
                 group-hover:scale-110
                 group-hover:-translate-y-[6vw]
-                group-hover:translate-x-[2vw]
+                group-hover:translate-x-[0vw]
+                md:group-hover:translate-x-[2vw]
                 group-hover:opacity-100
             ">
                 <img src={data.thumbnailUrl} alt="Thumbnail"
@@ -56,7 +56,7 @@ const MovieCard: React.FC<MovieCardProps> = ({
                     shadow-xl
                     rounded-t-md
                     w-full
-                    h-[12vw]
+                    h-[24vw] md:h-[12vw]
                  "
                 />
 
@@ -96,17 +96,17 @@ const MovieCard: React.FC<MovieCardProps> = ({
                         </div>
                     </div>
 
-                    <p className='text-green-400 font-semibold mt-4'>
+                    <p className='text-green-400 font-semibold mt-2'>
                         New <span className='text-white'>2023</span>
                     </p>
 
-                    <div className='flex flex-row mt-4 gap-2 items-center'>
+                    <div className='flex flex-row mt-2 gap-2 items-center'>
                         <p className='text-white text-[10px] lg:text-sm'>
                           {data.duration}  
                         </p>
                     </div>
 
-                    <div className='flex flex-row mt-4 gap-2 items-center'>
+                    <div className='flex flex-row mt-2 gap-2 items-center'>
                         <p className='text-white text-[10px] lg:text-sm'>
                           {data.genre}  
                         </p>
