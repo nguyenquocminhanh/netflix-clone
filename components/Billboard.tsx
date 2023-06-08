@@ -14,11 +14,11 @@ const Billboard = () => {
     }, [openModal, data?.id]);
 
     return (
-        <div className="relative h-[100vw] md:h-[56.25vw]">
+        <div className="relative h-[80vw] md:h-[56.25vw]">
             <video 
                 className="
                     w-full 
-                    h-[100vw]
+                    h-[80vw]
                     md:h-[56.25vw] 
                     object-cover 
                     brightness-[60%]"
