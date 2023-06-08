@@ -68,7 +68,7 @@ const InfoModal: React.FC<InfoModalProps> = ({
                     drop-shadow-md
                 `}>
                     <div className='relative h-96'>
-                        <video src={data?.videoUrl} poster={data?.thumbnailUrl} autoPlay muted loop
+                        <video src={data?.videoUrl} poster={data?.thumbnailUrl} autoPlay muted loop playsInline
                             className='
                                 w-full
                                 brightness-[60%]
