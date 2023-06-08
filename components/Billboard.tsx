@@ -25,6 +25,7 @@ const Billboard = () => {
                 autoPlay
                 muted
                 loop
+                playsInline
                 poster={data?.thumbnailUrl} 
                 src={data?.videoUrl}>
             </video>
