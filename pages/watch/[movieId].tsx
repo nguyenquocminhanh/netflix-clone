@@ -22,11 +22,11 @@ const Watch = () => {
                 flex
                 flex-row
                 items-center
-                gap-8
+                gap-4
                 bg-black
                 bg-opacity-70
             ">
-                <AiOutlineArrowLeft className="text-white cursor-pointer" size={40} onClick={() => router.push('/')}/>
+                <AiOutlineArrowLeft className="text-white cursor-pointer" size={30} onClick={() => router.push('/')}/>
                 <p className="text-white text-1xl md:text-3xl font-bold">
                     <span className="font-light">
                         Watching: 
