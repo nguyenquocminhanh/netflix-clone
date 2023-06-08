@@ -24,13 +24,14 @@ const PlayButton: React.FC<PlayButtonProps> = ({
             flex
             flex-row
             items-center
+            justify-center
             hover:bg-neutral-300
             transition
             cursor-pointer
         '
             onClick={() => router.push(`/watch/${movieId}`)}
         >
-            <BsPlayFill size={25} className='mr-1'/>
+            <BsPlayFill size={20} className='mr-1'/>
             Play
         </button>
     )

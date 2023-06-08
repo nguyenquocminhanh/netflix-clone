@@ -25,7 +25,7 @@ const Billboard = () => {
                 autoPlay
                 muted
                 loop
-                poster="data?.thumbnailUrl" 
+                poster={data?.thumbnailUrl} 
                 src={data?.videoUrl}>
             </video>
 
@@ -80,7 +80,7 @@ const Billboard = () => {
                     "
                         onClick={handleOpenModal}
                     >
-                        <AiOutlineInfoCircle className="mr-1"/>
+                        <AiOutlineInfoCircle className="mr-1" size={20}/>
                         More Info
                     </button>
                 </div>
