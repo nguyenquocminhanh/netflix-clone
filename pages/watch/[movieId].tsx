@@ -1,4 +1,6 @@
 import useMovie from "@/hooks/useMovie";
+import { NextPageContext } from "next";
+import { getSession } from "next-auth/react";
 import { useRouter } from "next/router"
 import { AiOutlineArrowLeft } from 'react-icons/ai'
 
@@ -38,6 +40,24 @@ const Watch = () => {
             <video src={data?.videoUrl} autoPlay controls className="h-full w-full"></video>
         </div>
     )
+}
+
+// protect route
+export async function getServerSideProps(context: NextPageContext) {
+    const session = await getSession(context);
+  
+    if (!session) {
+      return {
+        redirect: {
+          destination: '/auth',
+          permanent: false
+        }
+      }
+    }
+  
+    return {
+      props: {}
+    }
 }
 
 export default Watch;

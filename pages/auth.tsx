@@ -1,10 +1,11 @@
 import Input from "@/components/Input";
 import axios from "axios";
 import { useCallback, useState } from "react";
-import { signIn } from 'next-auth/react';
+import { getSession, signIn } from 'next-auth/react';
 
 import { FcGoogle } from 'react-icons/fc';
 import { FaGithub } from 'react-icons/fa';
+import { NextPageContext } from "next";
 
 const Auth = () => {
     const [email, setEmail] = useState('');
@@ -110,6 +111,23 @@ const Auth = () => {
             </div>
         </div>
     );
+}
+
+export async function getServerSideProps(context: NextPageContext) {
+    const session = await getSession(context);
+  
+    if (session) {
+      return {
+        redirect: {
+          destination: '/',
+          permanent: false
+        }
+      }
+    }
+  
+    return {
+      props: {}
+    }
 }
 
 export default Auth;
