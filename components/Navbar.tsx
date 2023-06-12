@@ -97,7 +97,7 @@ const Navbar = () => {
                 {/* every screen */}
                 <div className="flex flex-row ml-auto gap-2 md:gap-7 items-center">
                     <form onSubmit={searchHandler} className={`text-xs md:text-lg rounded-full py-1.5 md:py-2 px-2 md:px-4 flex items-center ${showBackground ? 'bg-gray-200 bg-opacity-90' : 'bg-zinc-700'}`}>
-                        <input ref={searchInputRef} id="searchKeyWord" type="text" className={`text-xs md:text-lg max-w-[100px] md:max-w-xs bg-transparent outline-none ml-2 flex-grow ${showBackground ? 'text-zinc-900 placeholder-zinc-900' : 'text-gray-200 placeholder-gray-200'}`} placeholder="Search..."/>
+                        <input ref={searchInputRef} id="searchKeyWord" type="text" className={`text-xs md:text-lg max-w-[110px] md:max-w-xs bg-transparent outline-none ml-2 flex-grow ${showBackground ? 'text-zinc-900 placeholder-zinc-900' : 'text-gray-200 placeholder-gray-200'}`} placeholder="Search..."/>
                         <button type="submit" className={`bg-transparent border-none ${showBackground ? 'text-zinc-900' : 'text-gray-200'}`}>
                             <BsSearch/>
                         </button>

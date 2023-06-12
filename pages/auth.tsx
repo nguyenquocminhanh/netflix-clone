@@ -4,7 +4,7 @@ import { useCallback, useState } from "react";
 import { getSession, signIn } from 'next-auth/react';
 
 import { FcGoogle } from 'react-icons/fc';
-import { FaGithub } from 'react-icons/fa';
+import { FaGithub, FaTwitter } from 'react-icons/fa';
 import { NextPageContext } from "next";
 import { toast } from "react-hot-toast";
 import { useRouter } from "next/router";
@@ -68,7 +68,7 @@ const Auth = () => {
                     content='Authentication'
                 />
             </Head>
-            
+
             <div className="relative h-full w-full bg-[url('/images/hero.jpg')] bg-no-repeat bg-fixed bg-cover">
                 <div className="bg-black w-full h-full lg:bg-opacity-50">
                     <nav className="px-12 py-5">
@@ -121,6 +121,11 @@ const Auth = () => {
                                     <div onClick={() => signIn('github', { callbackUrl: '/profiles' })} 
                                         className="w-10 h-10 bg-white rounded-full flex items-center justify-center cursor-pointer hover:opacity-80 transition">
                                         <FaGithub size={30}/>
+                                    </div>
+
+                                    <div onClick={() => signIn('twitter', { callbackUrl: '/profiles' })} 
+                                        className="w-10 h-10 bg-white rounded-full flex items-center justify-center cursor-pointer hover:opacity-80 transition">
+                                        <FaTwitter size={30}/>
                                     </div>
                                 </div>
 

@@ -3,6 +3,7 @@ import { compare } from 'bcrypt';
 import Credentials from 'next-auth/providers/credentials';
 import GithubProvider from 'next-auth/providers/github';
 import GoogleProvider from 'next-auth/providers/google';
+import TwitterProvider from 'next-auth/providers/twitter';
 import prismadb from '@/libs/prismadb';
 
 import { PrismaAdapter } from '@next-auth/prisma-adapter';
@@ -16,6 +17,10 @@ export const authOptions: AuthOptions = {
         GoogleProvider({
             clientId: process.env.GOOGLE_CLIENT_ID || '',
             clientSecret: process.env.GOOGLE_CLIENT_SECRET || ''
+        }),
+        TwitterProvider({
+            clientId: process.env.TWITTER_ID || '',
+            clientSecret: process.env.TWITTER_SECRET || '',
         }),
         Credentials({
             id: 'credentials',
