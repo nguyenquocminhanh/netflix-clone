@@ -3,14 +3,13 @@ import InfoModal from "@/components/InfoModal";
 import MovieList from "@/components/MovieList";
 import Navbar from "@/components/Navbar";
 import useBillboard from "@/hooks/useBillboard";
+import useCurrentUser from "@/hooks/useCurrentUser";
 import useFavorite from "@/hooks/useFavorites";
 import useInfoModal from "@/hooks/useInfoModal";
 import useMovieList from "@/hooks/useMovieList";
 import prismadb from '@/libs/prismadb';
-import axios from "axios";
 import Head from "next/head";
 import { useRouter } from "next/router";
-import { useEffect } from "react";
 
 const capitalizeFirstLetter = (str: string) => {
   return str.charAt(0).toUpperCase() + str.slice(1);
@@ -33,16 +32,11 @@ const Category: React.FC<CategoryProps> = ({
   const { data } = useBillboard(category.id.toString());
   const router = useRouter();
 
-  // protect route
-  useEffect(() => {
-    axios.get('/api/check-authorization')
-    .then(response => {
-    
-    })
-    .catch(error => {
-      router.push('/auth');
-    })
-  }, [router])
+  const { data: user, error } = useCurrentUser();
+
+  if (error) {
+    router.push('/auth');
+  }
 
   return (
     <>

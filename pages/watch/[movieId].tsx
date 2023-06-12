@@ -2,8 +2,7 @@ import { useRouter } from "next/router"
 import { AiOutlineArrowLeft } from 'react-icons/ai';
 import prismadb from '@/libs/prismadb';
 import Head from "next/head";
-import { useEffect } from "react";
-import axios from "axios";
+import useCurrentUser from "@/hooks/useCurrentUser";
 
 interface MovieIdProps {
     movie: Record<string, any>
@@ -15,15 +14,11 @@ const Watch: React.FC<MovieIdProps> = ({
     const router = useRouter();
 
     // protect route
-    useEffect(() => {
-        axios.get('/api/check-authorization')
-        .then(response => {
-        
-        })
-        .catch(error => {
-            router.push('/auth');
-        })
-    }, [router])
+    const { data: user, error } = useCurrentUser();
+
+    if (error) {
+      router.push('/auth');
+    }
 
     return (
         <>
