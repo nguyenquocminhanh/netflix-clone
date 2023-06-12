@@ -38,15 +38,15 @@ const SearchResult = () => {
      <Navbar />
 
       
-      <div className="pb-40 pt-12 md:pd-20">
+      <div className="pb-40 pt-12 md:pt-20 md:pd-20">
         {movies.length > 0  ?
             <MovieList
-                title={`Search result for ${searchKeyword}`}
+                title={`Search result for "${searchKeyword}"`}
                 id="search"
                 data={movies}
             />
         : <p className='ml-4 md:ml-16 mt-12 md:mt-20 text-white text-md md:text-xl lg:text-2xl font-semibold mb-4'>
-            Sorry! There are no matching result...
+            {'Sorry! There are no matching result for ' + '"' + searchKeyword + '"' + '...'}
         </p>}
       
       </div>
