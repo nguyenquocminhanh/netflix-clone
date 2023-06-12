@@ -3,6 +3,7 @@ import MovieList from "@/components/MovieList";
 import Navbar from "@/components/Navbar";
 import useInfoModal from "@/hooks/useInfoModal";
 import useMovieListSearch from "@/hooks/useMovieListSearch";
+import Head from "next/head";
 import { useRouter } from "next/router";
 
 
@@ -18,6 +19,13 @@ const SearchResult = () => {
 
   return (
     <>
+    <Head>
+        <title>Search Result</title>
+        <meta
+            name="description"
+            content='Search Result'
+        />
+    </Head>
      <InfoModal visible={isOpen} onClose={closeModal}/>
 
      <Navbar />
