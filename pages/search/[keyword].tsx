@@ -15,13 +15,29 @@ const SearchResult = () => {
   ? decodeURIComponent(router.query.keyword.join(' '))
   : decodeURIComponent(router.query.keyword!) || '';
 
-  const { data: movies = [] } = useMovieListSearch(searchKeyword);
+  const { data: movies } = useMovieListSearch(searchKeyword);
 
     // protect route
     const { data: user, error } = useCurrentUser();
 
     if (error) {
         router.push('/auth');
+    }
+
+    let content = null;
+
+    if (movies && movies.length === 0) {
+      content = (<p className='ml-4 md:ml-16 mt-12 md:mt-20 text-white text-md md:text-xl lg:text-2xl font-semibold mb-4'>
+        {'Sorry! There are no matching result for ' + '"' + searchKeyword + '"' + '...'}
+      </p>)
+    }
+
+    if (movies && movies.length > 0) {
+      content =  (<MovieList
+          title={`Search result for "${searchKeyword}"`}
+          id="search"
+          data={movies}
+      />);
     }
 
   return (
@@ -37,18 +53,8 @@ const SearchResult = () => {
 
      <Navbar />
 
-      
       <div className="pb-40 pt-12 md:pt-20 md:pd-20">
-        {movies.length > 0  ?
-            <MovieList
-                title={`Search result for "${searchKeyword}"`}
-                id="search"
-                data={movies}
-            />
-        : <p className='ml-4 md:ml-16 mt-12 md:mt-20 text-white text-md md:text-xl lg:text-2xl font-semibold mb-4'>
-            {'Sorry! There are no matching result for ' + '"' + searchKeyword + '"' + '...'}
-        </p>}
-      
+        {content}
       </div>
     </>
   )
