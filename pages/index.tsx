@@ -25,8 +25,8 @@ export default function Home() {
 
       <div className="pb-40">
         <MovieList
-          title="Trending Now"
-          id="trending"
+          title="All Movies"
+          id="all"
           data={movies}
         />
 

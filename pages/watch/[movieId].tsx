@@ -1,6 +1,3 @@
-import useMovie from "@/hooks/useMovie";
-import { NextPageContext } from "next";
-import { getSession } from "next-auth/react";
 import { useRouter } from "next/router"
 import { AiOutlineArrowLeft } from 'react-icons/ai';
 import prismadb from '@/libs/prismadb';
@@ -13,9 +10,6 @@ const Watch: React.FC<MovieIdProps> = ({
     movie
 }) => {
     const router = useRouter();
-    // // get movieId from url query
-    // const { movieId } = router.query;
-    // const { data } = useMovie(movieId as string);
 
     return (
         <div className="
@@ -35,7 +29,7 @@ const Watch: React.FC<MovieIdProps> = ({
                 bg-black
                 bg-opacity-70
             ">
-                <AiOutlineArrowLeft className="text-white cursor-pointer" size={30} onClick={() => router.push('/')}/>
+                <AiOutlineArrowLeft className="text-white cursor-pointer" size={30} onClick={() => router.back()}/>
                 <p className="text-white text-1xl md:text-3xl font-bold">
                     <span className="font-light">
                         Watching: 
