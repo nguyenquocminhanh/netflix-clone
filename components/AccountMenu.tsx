@@ -1,5 +1,6 @@
 import useCurrentUser from "@/hooks/useCurrentUser";
 import { signOut } from "next-auth/react";
+import { useRouter } from "next/router";
 
 interface AccountMenuProps {
     visible?: boolean
@@ -9,6 +10,7 @@ const AccountMenu: React.FC<AccountMenuProps> = ( {
     visible
 }) => {
     const { data } = useCurrentUser();
+    const router = useRouter();
 
     if (!visible) {
         return null;

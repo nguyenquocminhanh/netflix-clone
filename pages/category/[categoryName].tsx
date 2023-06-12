@@ -7,7 +7,10 @@ import useFavorite from "@/hooks/useFavorites";
 import useInfoModal from "@/hooks/useInfoModal";
 import useMovieList from "@/hooks/useMovieList";
 import prismadb from '@/libs/prismadb';
+import axios from "axios";
 import Head from "next/head";
+import { useRouter } from "next/router";
+import { useEffect } from "react";
 
 const capitalizeFirstLetter = (str: string) => {
   return str.charAt(0).toUpperCase() + str.slice(1);
@@ -28,6 +31,18 @@ const Category: React.FC<CategoryProps> = ({
   const { isOpen, closeModal } = useInfoModal();
 
   const { data } = useBillboard(category.id.toString());
+  const router = useRouter();
+
+  // protect route
+  useEffect(() => {
+    axios.get('/api/check-authorization')
+    .then(response => {
+    
+    })
+    .catch(error => {
+      router.push('/auth');
+    })
+  }, [router])
 
   return (
     <>
@@ -70,7 +85,7 @@ export async function getStaticPaths() {
     return {
         // chi pre-render nhung page truoc khi build app
         // ko can co gang pre-render nhung page khac, nhung page khac duoc them vao sau khi build se dc generate at incoming request
-        fallback: false,  
+        fallback: 'blocking',  
 
         paths: categories.map(category => ({
             params: {categoryName: category.name}
@@ -79,6 +94,7 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps( context: any ) {
+    // get category
     const categoryName = context.params.categoryName;
  
     const category = await prismadb.category.findFirst({
@@ -97,6 +113,7 @@ export async function getStaticProps( context: any ) {
     return {
       props: {
         category,
-      }
+      },
+      revalidate: 3600
     };
 }

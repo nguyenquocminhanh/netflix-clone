@@ -123,10 +123,10 @@ const Auth = () => {
                                         <FaGithub size={30}/>
                                     </div>
 
-                                    <div onClick={() => signIn('twitter', { callbackUrl: '/profiles' })} 
+                                    {/* <div onClick={() => signIn('twitter', { callbackUrl: '/profiles' })} 
                                         className="w-10 h-10 bg-white rounded-full flex items-center justify-center cursor-pointer hover:opacity-80 transition">
                                         <FaTwitter size={30}/>
-                                    </div>
+                                    </div> */}
                                 </div>
 
                                 <p className="text-neutral-500 mt-6">

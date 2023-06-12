@@ -2,6 +2,8 @@ import { useRouter } from "next/router"
 import { AiOutlineArrowLeft } from 'react-icons/ai';
 import prismadb from '@/libs/prismadb';
 import Head from "next/head";
+import { useEffect } from "react";
+import axios from "axios";
 
 interface MovieIdProps {
     movie: Record<string, any>
@@ -11,6 +13,17 @@ const Watch: React.FC<MovieIdProps> = ({
     movie
 }) => {
     const router = useRouter();
+
+    // protect route
+    useEffect(() => {
+        axios.get('/api/check-authorization')
+        .then(response => {
+        
+        })
+        .catch(error => {
+            router.push('/auth');
+        })
+    }, [router])
 
     return (
         <>
@@ -47,7 +60,7 @@ const Watch: React.FC<MovieIdProps> = ({
                     </p>
                 </nav>
 
-                <video src={movie?.videoUrl} autoPlay controls className="h-full w-full"></video>
+                <video poster={movie?.thumbnailUrl} src={movie?.videoUrl} autoPlay controls className="h-full w-full"></video>
             </div>
         </>
     )

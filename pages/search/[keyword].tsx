@@ -3,8 +3,10 @@ import MovieList from "@/components/MovieList";
 import Navbar from "@/components/Navbar";
 import useInfoModal from "@/hooks/useInfoModal";
 import useMovieListSearch from "@/hooks/useMovieListSearch";
+import axios from "axios";
 import Head from "next/head";
 import { useRouter } from "next/router";
+import { useEffect } from "react";
 
 
 const SearchResult = () => {
@@ -16,6 +18,17 @@ const SearchResult = () => {
   : decodeURIComponent(router.query.keyword!) || '';
 
   const { data: movies = [] } = useMovieListSearch(searchKeyword);
+
+    // protect route
+    useEffect(() => {
+        axios.get('/api/check-authorization')
+        .then(response => {
+        
+        })
+        .catch(error => {
+          router.push('/auth');
+        })
+    }, [router])
 
   return (
     <>
