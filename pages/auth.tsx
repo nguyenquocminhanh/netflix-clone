@@ -8,6 +8,7 @@ import { FaGithub } from 'react-icons/fa';
 import { NextPageContext } from "next";
 import { toast } from "react-hot-toast";
 import { useRouter } from "next/router";
+import Head from "next/head";
 
 const Auth = () => {
     const [email, setEmail] = useState('');
@@ -59,72 +60,82 @@ const Auth = () => {
     }, [email, name, password, login]);
 
     return (
-        <div className="relative h-full w-full bg-[url('/images/hero.jpg')] bg-no-repeat bg-fixed bg-cover">
-            <div className="bg-black w-full h-full lg:bg-opacity-50">
-                <nav className="px-12 py-5">
-                    <img src="/images/logo.png" alt="Logo" className="h-12"/>
-                </nav>
+        <>
+            <Head>
+                <title>Authentication</title>
+                <meta
+                    name="description"
+                    content='Authentication'
+                />
+            </Head>
+            
+            <div className="relative h-full w-full bg-[url('/images/hero.jpg')] bg-no-repeat bg-fixed bg-cover">
+                <div className="bg-black w-full h-full lg:bg-opacity-50">
+                    <nav className="px-12 py-5">
+                        <img src="/images/logo.png" alt="Logo" className="h-12"/>
+                    </nav>
 
-                {/* auth form */}
-                <form className="flex justify-center" onSubmit={variant === 'login' ? login : register} >
-                    <div className="bg-black bg-opacity-70 px-6 py-6 md:px-16 md:py-16 self-center mt-2 lg:w-2/5 lg:max-w-md rounded-md w-full">
-                        <h2 className="text-white text-4xl mb-8 font-semibold">
-                            {variant === 'login' ? 'Sign in' : 'Register'} 
-                        </h2>
-                        <div className="flex flex-col gap-4">
-                            {variant === 'register' && (
+                    {/* auth form */}
+                    <form className="flex justify-center" onSubmit={variant === 'login' ? login : register} >
+                        <div className="bg-black bg-opacity-70 px-6 py-6 md:px-16 md:py-16 self-center mt-2 lg:w-2/5 lg:max-w-md rounded-md w-full">
+                            <h2 className="text-white text-4xl mb-8 font-semibold">
+                                {variant === 'login' ? 'Sign in' : 'Register'} 
+                            </h2>
+                            <div className="flex flex-col gap-4">
+                                {variant === 'register' && (
+                                    <Input 
+                                        label="Your Name"
+                                        onChange={(ev: any) => {setName(ev.target.value)}}
+                                        id="name"
+                                        value={name}
+                                    />
+                                )}
+                                
                                 <Input 
-                                    label="Your Name"
-                                    onChange={(ev: any) => {setName(ev.target.value)}}
-                                    id="name"
-                                    value={name}
+                                    label="Email"
+                                    onChange={(ev: any) => {setEmail(ev.target.value)}}
+                                    id="email"
+                                    type="email"
+                                    value={email}
                                 />
-                            )}
-                            
-                            <Input 
-                                label="Email"
-                                onChange={(ev: any) => {setEmail(ev.target.value)}}
-                                id="email"
-                                type="email"
-                                value={email}
-                            />
 
-                            <Input 
-                                label="Password"
-                                onChange={(ev: any) => {setPassword(ev.target.value)}}
-                                id="password"
-                                type="password"
-                                value={password}
-                            />
+                                <Input 
+                                    label="Password"
+                                    onChange={(ev: any) => {setPassword(ev.target.value)}}
+                                    id="password"
+                                    type="password"
+                                    value={password}
+                                />
 
-                            <button type="submit" className="bg-red-600 py-3 text-white rounded-md w-full mt-6 hover:bg-red-700 transition">
-                                {variant === 'login' ? 'Login' : 'Sign up'}
-                            </button>
-                            
-                            {/* social buttons */}
-                            <div className="flex flex-row items-center gap-4 mt-8 justify-center">
-                                <div onClick={() => signIn('google', { callbackUrl: '/profiles' })} 
-                                    className="w-10 h-10 bg-white rounded-full flex items-center justify-center cursor-pointer hover:opacity-80 transition">
-                                    <FcGoogle size={30}/>
+                                <button type="submit" className="bg-red-600 py-3 text-white rounded-md w-full mt-6 hover:bg-red-700 transition">
+                                    {variant === 'login' ? 'Login' : 'Sign up'}
+                                </button>
+                                
+                                {/* social buttons */}
+                                <div className="flex flex-row items-center gap-4 mt-8 justify-center">
+                                    <div onClick={() => signIn('google', { callbackUrl: '/profiles' })} 
+                                        className="w-10 h-10 bg-white rounded-full flex items-center justify-center cursor-pointer hover:opacity-80 transition">
+                                        <FcGoogle size={30}/>
+                                    </div>
+
+                                    <div onClick={() => signIn('github', { callbackUrl: '/profiles' })} 
+                                        className="w-10 h-10 bg-white rounded-full flex items-center justify-center cursor-pointer hover:opacity-80 transition">
+                                        <FaGithub size={30}/>
+                                    </div>
                                 </div>
 
-                                <div onClick={() => signIn('github', { callbackUrl: '/profiles' })} 
-                                    className="w-10 h-10 bg-white rounded-full flex items-center justify-center cursor-pointer hover:opacity-80 transition">
-                                    <FaGithub size={30}/>
-                                </div>
+                                <p className="text-neutral-500 mt-6">
+                                    {variant === 'login' ? 'First time using Netflix?' : 'Already have an account?'}
+                                    <span onClick={toggleVariant} className="text-white ml-1 hover:underline cursor-pointer">
+                                        {variant === 'login' ? 'Create an account' : 'Login'}
+                                    </span>
+                                </p>
                             </div>
-
-                            <p className="text-neutral-500 mt-6">
-                                {variant === 'login' ? 'First time using Netflix?' : 'Already have an account?'}
-                                <span onClick={toggleVariant} className="text-white ml-1 hover:underline cursor-pointer">
-                                    {variant === 'login' ? 'Create an account' : 'Login'}
-                                </span>
-                            </p>
                         </div>
-                    </div>
-                </form>
+                    </form>
+                </div>
             </div>
-        </div>
+        </>
     );
 }
 

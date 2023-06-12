@@ -7,6 +7,7 @@ import useFavorite from "@/hooks/useFavorites";
 import useInfoModal from "@/hooks/useInfoModal";
 import useMovieList from "@/hooks/useMovieList";
 import prismadb from '@/libs/prismadb';
+import Head from "next/head";
 
 const capitalizeFirstLetter = (str: string) => {
   return str.charAt(0).toUpperCase() + str.slice(1);
@@ -30,6 +31,13 @@ const Category: React.FC<CategoryProps> = ({
 
   return (
     <>
+      <Head>
+          <title>{capitalizeFirstLetter(category.name) + ' - Netflix Clone'}</title>
+          <meta
+              name="description"
+              content={capitalizeFirstLetter(category.name) + ' - Netflix Clone'}
+          />
+     </Head>
      <InfoModal visible={isOpen} onClose={closeModal}/>
      <Navbar />
 

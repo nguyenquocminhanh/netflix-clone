@@ -4,6 +4,7 @@ import NavbarItem from "./NavbarItem";
 import { BsBell, BsChevronDown, BsSearch } from 'react-icons/bs'
 import AccountMenu from "./AccountMenu";
 import { useRouter } from "next/router";
+import Link from "next/link";
 
 const TOP_OFFSET = 66;
 
@@ -70,7 +71,7 @@ const Navbar = () => {
                 duration-500
                 ${showBackground ? 'bg-zinc-900 bg-opacity-90' : ''}
             `}>
-                <img className="h-4 lg:h-7" src="/images/logo.png" alt="Logo"/>
+                <Link href="/"><img className="h-4 lg:h-7" src="/images/logo.png" alt="Logo"/></Link>
                 {/* Only Desktop Screen */}
                 <div className="
                     flex-row

@@ -1,6 +1,7 @@
 import { useRouter } from "next/router"
 import { AiOutlineArrowLeft } from 'react-icons/ai';
 import prismadb from '@/libs/prismadb';
+import Head from "next/head";
 
 interface MovieIdProps {
     movie: Record<string, any>
@@ -12,34 +13,43 @@ const Watch: React.FC<MovieIdProps> = ({
     const router = useRouter();
 
     return (
-        <div className="
-            h-screen
-            w-screen
-            bg-black
-        ">
-            <nav className="
-                fixed
-                w-full
-                p-4
-                z-10
-                flex
-                flex-row
-                items-center
-                gap-4
+        <>
+            <Head>
+                <title>{movie.title}</title>
+                <meta
+                    name="description"
+                    content={movie.title}
+                />
+            </Head>
+            <div className="
+                h-screen
+                w-screen
                 bg-black
-                bg-opacity-70
             ">
-                <AiOutlineArrowLeft className="text-white cursor-pointer" size={30} onClick={() => router.back()}/>
-                <p className="text-white text-1xl md:text-3xl font-bold">
-                    <span className="font-light">
-                        Watching: 
-                    </span>
-                    &nbsp;{movie?.title}
-                </p>
-            </nav>
+                <nav className="
+                    fixed
+                    w-full
+                    p-4
+                    z-10
+                    flex
+                    flex-row
+                    items-center
+                    gap-4
+                    bg-black
+                    bg-opacity-70
+                ">
+                    <AiOutlineArrowLeft className="text-white cursor-pointer" size={30} onClick={() => router.back()}/>
+                    <p className="text-white text-1xl md:text-3xl font-bold">
+                        <span className="font-light">
+                            Watching: 
+                        </span>
+                        &nbsp;{movie?.title}
+                    </p>
+                </nav>
 
-            <video src={movie?.videoUrl} autoPlay controls className="h-full w-full"></video>
-        </div>
+                <video src={movie?.videoUrl} autoPlay controls className="h-full w-full"></video>
+            </div>
+        </>
     )
 }
 

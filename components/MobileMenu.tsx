@@ -29,7 +29,7 @@ const MobileMenu: React.FC<MobileMenuProps> = ({
     return (
         <div className="bg-black w-56 absolute top-8 left-0 py-5 flex-col border-2 border-gray-800 flex">
             <Link href="/" className="flex flex-col gap-4">
-                <div className={(categoryName === 'home' ? 'text-red-900' : 'text-white') + ' px-3 text-center hover:underline'}>
+                <div className={(categoryName === 'home' ? 'text-red-600' : 'text-white') + ' px-3 text-center hover:underline'}>
                     Home
                 </div>
             </Link>
