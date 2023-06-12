@@ -17,7 +17,7 @@ class MyDocument extends Document {
                     <meta property="og:title" content="Netflix Clone - Minh Nguyen"/>
                     <meta property="og:type" content="website"/>
                     <meta property="og:url" content="https://netflix-clone-minh-nguyen.vercel.app"/>
-                    <meta property="og:image" content="/57.png"/>
+                    <meta property="og:image" content="/images/Netflix-N-Symbol-logo.png"/>
 
                 </Head>
 
