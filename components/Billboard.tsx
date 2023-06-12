@@ -30,7 +30,7 @@ const Billboard: React.FC<BillboardProps> = ({
                 muted
                 loop
                 playsInline
-                poster={data?.thumbnailUrl} 
+                // poster={data?.thumbnailUrl} 
                 src={data?.videoUrl}>
             </video>
 

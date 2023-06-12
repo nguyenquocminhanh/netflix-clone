@@ -14,7 +14,7 @@ const NavbarItem: React.FC<NavbarItemProps> = ({
     const router = useRouter();
     const { query } = router;
     let { categoryName } = query;
-    if (categoryName === undefined) {
+    if (categoryName === undefined && !router.pathname.includes('search')) {
         categoryName = 'home';
     }
 
