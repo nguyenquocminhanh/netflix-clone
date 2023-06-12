@@ -112,7 +112,37 @@ const Auth = () => {
                                 </button>
                                 
                                 {/* social buttons */}
-                                <div className="flex flex-row items-center gap-4 mt-8 justify-center">
+                                <div className="relative mt-4">
+                                    <div className="
+                                        absolute
+                                        inset-0
+                                        flex
+                                        items-center
+                                    ">
+                                        <div className="
+                                            w-full 
+                                            border-t 
+                                            border-gray-300"
+                                        />
+                                    </div>
+
+                                    <div className="
+                                        relative
+                                        flex
+                                        justify-center 
+                                        text-sm"
+                                    >
+                                        <span className="
+                                            bg-white
+                                            px-2
+                                            text-neutral-500"
+                                        >
+                                            Or continue with
+                                        </span>
+                                    </div>            
+                                </div>
+
+                                <div className="flex flex-row items-center gap-4 justify-center">
                                     <div onClick={() => signIn('google', { callbackUrl: '/profiles' })} 
                                         className="w-10 h-10 bg-white rounded-full flex items-center justify-center cursor-pointer hover:opacity-80 transition">
                                         <FcGoogle size={30}/>
@@ -129,7 +159,7 @@ const Auth = () => {
                                     </div> */}
                                 </div>
 
-                                <p className="text-neutral-500 mt-6">
+                                <p className="text-neutral-500 mt-4">
                                     {variant === 'login' ? 'First time using Netflix?' : 'Already have an account?'}
                                     <span onClick={toggleVariant} className="text-white ml-1 hover:underline cursor-pointer">
                                         {variant === 'login' ? 'Create an account' : 'Login'}
