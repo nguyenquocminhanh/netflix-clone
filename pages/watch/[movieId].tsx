@@ -2,13 +2,20 @@ import useMovie from "@/hooks/useMovie";
 import { NextPageContext } from "next";
 import { getSession } from "next-auth/react";
 import { useRouter } from "next/router"
-import { AiOutlineArrowLeft } from 'react-icons/ai'
+import { AiOutlineArrowLeft } from 'react-icons/ai';
+import prismadb from '@/libs/prismadb';
 
-const Watch = () => {
+interface MovieIdProps {
+    movie: Record<string, any>
+}
+
+const Watch: React.FC<MovieIdProps> = ({
+    movie
+}) => {
     const router = useRouter();
-    // get movieId from url query
-    const { movieId } = router.query;
-    const { data } = useMovie(movieId as string);
+    // // get movieId from url query
+    // const { movieId } = router.query;
+    // const { data } = useMovie(movieId as string);
 
     return (
         <div className="
@@ -33,31 +40,52 @@ const Watch = () => {
                     <span className="font-light">
                         Watching: 
                     </span>
-                    &nbsp;{data?.title}
+                    &nbsp;{movie?.title}
                 </p>
             </nav>
 
-            <video src={data?.videoUrl} autoPlay controls className="h-full w-full"></video>
+            <video src={movie?.videoUrl} autoPlay controls className="h-full w-full"></video>
         </div>
     )
 }
 
-// protect route
-export async function getServerSideProps(context: NextPageContext) {
-    const session = await getSession(context);
-  
-    if (!session) {
-      return {
-        redirect: {
-          destination: '/auth',
-          permanent: false
+// dynamic paths
+export async function getStaticPaths() {
+    // fetch data ONLY contain _id NOTHING ELSE
+    const movies = await prismadb.movie.findMany();
+
+    return {
+        // chi pre-render nhung page truoc khi build app
+        // ko can co gang pre-render nhung page khac, nhung page khac duoc them vao sau khi build se dc generate at incoming request
+        fallback: false,  
+
+        paths: movies.map(movie => ({
+            params: {movieId: movie.id.toString()}
+        }))
+    }
+}
+
+export async function getStaticProps( context: any ) {
+    const movieId = context.params.movieId;
+ 
+    const movie = await prismadb.movie.findUnique({
+        where: {
+            id: movieId
         }
-      }
+    });
+  
+    if (!movie) {
+      // If movieData doesn't exist, return not found page
+      return {
+        notFound: true,
+      };
     }
   
     return {
-      props: {}
-    }
+      props: {
+        movie,
+      }
+    };
 }
 
 export default Watch;

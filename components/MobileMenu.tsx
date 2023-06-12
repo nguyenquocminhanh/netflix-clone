@@ -40,12 +40,6 @@ const MobileMenu: React.FC<MobileMenuProps> = ({
                     My List
                 </div>
             </div>
-
-            <div className="flex flex-col gap-4">
-                <div className="px-3 text-center text-white hover:underline">
-                    Browse By Languages
-                </div>
-            </div>
         </div>
     )
 }

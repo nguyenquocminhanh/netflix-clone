@@ -4,9 +4,13 @@ import PlayButton from "./PlayButton";
 import { useCallback } from "react";
 import useInfoModal from "@/hooks/useInfoModal";
 
-const Billboard = () => {
-    const { data } = useBillboard();
+interface BillboardProps {
+    data: Record<string, any>
+}
 
+const Billboard: React.FC<BillboardProps> = ({
+    data
+}) => {
     const { openModal } = useInfoModal();
 
     const handleOpenModal = useCallback(() => {
@@ -14,7 +18,7 @@ const Billboard = () => {
     }, [openModal, data?.id]);
 
     return (
-        <div className="relative h-[80vw] md:h-[56.25vw]">
+        <div className="relative h-[80vw] md:h-[56.25vw]" id="billboard">
             <video 
                 className="
                     w-full 

@@ -11,6 +11,13 @@ const Navbar = () => {
     const [showAccountMenu, setShowAccountMenu] = useState(false);
     const [showBackground, setShowBackground] = useState(false);
 
+    const scrollToSection = (sectionId: string) => {
+        const section = document.getElementById(sectionId);
+        if (section) {
+          section.scrollIntoView({ behavior: 'smooth' });
+        }
+    };
+
     useEffect(() => {
         const handleScroll = () => {
             if (window.scrollY >= TOP_OFFSET) {
@@ -58,12 +65,11 @@ const Navbar = () => {
                     hidden
                     lg:flex
                 ">
-                    <NavbarItem label="Home"/>
+                    <NavbarItem onClick={() => scrollToSection('billboard')} label="Home"/>
                     <NavbarItem label="Series"/>
                     <NavbarItem label="Films"/>
-                    <NavbarItem label="New & Popular"/>
-                    <NavbarItem label="My List"/>
-                    <NavbarItem label="Browse by languages"/>
+                    <NavbarItem onClick={() => scrollToSection('trending')} label="New & Popular"/>
+                    <NavbarItem onClick={() => scrollToSection('my-list')} label="My List"/>
                 </div>
 
                 {/* only mobile screen */}

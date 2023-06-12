@@ -2,6 +2,7 @@ import Billboard from "@/components/Billboard";
 import InfoModal from "@/components/InfoModal";
 import MovieList from "@/components/MovieList";
 import Navbar from "@/components/Navbar";
+import useBillboard from "@/hooks/useBillboard";
 import useFavorite from "@/hooks/useFavorites";
 import useInfoModal from "@/hooks/useInfoModal";
 import useMovieList from "@/hooks/useMovieList";
@@ -13,21 +14,25 @@ export default function Home() {
   const { data: favorites = [] } = useFavorite();
   const { isOpen, closeModal } = useInfoModal();
 
+  const { data } = useBillboard();
+
   return (
     <>
      <InfoModal visible={isOpen} onClose={closeModal}/>
      <Navbar />
 
-     <Billboard />
+     <Billboard data={data}/>
 
       <div className="pb-40">
         <MovieList
           title="Trending Now"
+          id="trending"
           data={movies}
         />
 
         <MovieList
           title="My List"
+          id="my-list"
           data={favorites}
         />
       </div>

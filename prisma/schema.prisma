@@ -75,4 +75,20 @@ model Movie {
   thumbnailUrl String
   genre String
   duration String
+
+  categories CategoryMovie[]
+}
+
+model Category {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  name String
+  movies CategoryMovie[]
+}
+
+model CategoryMovie {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  movie Movie @relation(fields: [movieId], references: [id])
+  movieId String @db.ObjectId
+  category Category @relation(fields: [categoryId], references: [id])
+  categoryId String @db.ObjectId
 }

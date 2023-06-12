@@ -1,14 +1,16 @@
 interface NavbarItemProps {
     label: string;
+    onClick?: () => void
 }
 
 const NavbarItem: React.FC<NavbarItemProps> = ({
-    label
+    label,
+    onClick
 }) => {
     return (
-        <div className="text-white cursor-pointer hover:text-gray-300 transition">
+        <a onClick={onClick} className="text-white cursor-pointer hover:text-gray-300 transition">
             {label}
-        </div>
+        </a>
     )
 }
 

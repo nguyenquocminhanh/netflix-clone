@@ -6,38 +6,53 @@ import { getSession, signIn } from 'next-auth/react';
 import { FcGoogle } from 'react-icons/fc';
 import { FaGithub } from 'react-icons/fa';
 import { NextPageContext } from "next";
+import { toast } from "react-hot-toast";
+import { useRouter } from "next/router";
 
 const Auth = () => {
     const [email, setEmail] = useState('');
     const [name, setName] = useState('');
     const [password, setPassword] = useState('');
     const [variant, setVariant] = useState('login');
+    const router = useRouter();
     
     const toggleVariant = useCallback(() => {
         setVariant((currentVariant) => currentVariant === 'login' ? 'register' : 'login');
     }, []);
 
-    const login = useCallback(async () => {
+    const login = useCallback(async (event: React.FormEvent<HTMLFormElement>) => {
+        event.preventDefault();
         try {
-            await signIn('credentials', {
+            const result = await signIn('credentials', {
                 email, 
                 password,
-                callbackUrl: '/profiles'
+                callbackUrl: '/profiles',
+                redirect: false
             });
+
+            if (result?.error) {
+                toast.error('Invalid credentials')
+            } 
+            if (result?.ok && !result?.error) {
+                toast.success('Logged in!');
+                router.push('/profiles');
+            }
         } catch (error) {
             console.log(error);
         }
-    }, [email, password]);
+    }, [email, password, router]);
 
-    const register = useCallback(async () => {
+    const register = useCallback(async (event: React.FormEvent<HTMLFormElement>) => {
+        event.preventDefault();
         try {
             axios.post('/api/register', {
                 email,
                 name,
                 password
-            });
-
-            login();
+            })
+            .then(() => login(event))
+            .catch(() => toast.error('Something went wrong!'))
+            // .finally(() => toast.success('Accout created & logged in!'));
         } catch (error) {
             console.log(error);
         }
@@ -51,7 +66,7 @@ const Auth = () => {
                 </nav>
 
                 {/* auth form */}
-                <div className="flex justify-center">
+                <form className="flex justify-center" onSubmit={variant === 'login' ? login : register} >
                     <div className="bg-black bg-opacity-70 px-6 py-6 md:px-16 md:py-16 self-center mt-2 lg:w-2/5 lg:max-w-md rounded-md w-full">
                         <h2 className="text-white text-4xl mb-8 font-semibold">
                             {variant === 'login' ? 'Sign in' : 'Register'} 
@@ -59,7 +74,7 @@ const Auth = () => {
                         <div className="flex flex-col gap-4">
                             {variant === 'register' && (
                                 <Input 
-                                    label="Username"
+                                    label="Your Name"
                                     onChange={(ev: any) => {setName(ev.target.value)}}
                                     id="name"
                                     value={name}
@@ -82,7 +97,7 @@ const Auth = () => {
                                 value={password}
                             />
 
-                            <button onClick={variant === 'login' ? login : register} className="bg-red-600 py-3 text-white rounded-md w-full mt-6 hover:bg-red-700 transition">
+                            <button type="submit" className="bg-red-600 py-3 text-white rounded-md w-full mt-6 hover:bg-red-700 transition">
                                 {variant === 'login' ? 'Login' : 'Sign up'}
                             </button>
                             
@@ -107,7 +122,7 @@ const Auth = () => {
                             </p>
                         </div>
                     </div>
-                </div>
+                </form>
             </div>
         </div>
     );
